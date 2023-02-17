@@ -25,11 +25,12 @@ jobs:
           kubeconfig: ${{ secrets.kubeconfig }}
           context: kubeconfig
 
-      - name:  Install kubectl
-        run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
-          echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
-
-      - name: Test kubectl
-        run: kubectl get ns
+      - uses: Azure/k8s-deploy@v4
+        with:
+          action: deploy
+          manifests: |
+              k8s/*.yaml
+          images: |
+              amatildes/somosnerd:1.0.0
+          imagepullsecrets: |
+              user-dashboard
