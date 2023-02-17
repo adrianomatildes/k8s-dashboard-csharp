@@ -6,3 +6,7 @@ rules:
 - apiGroups: [""]
   resources: ["namespaces", "pods", "services"]
   verbs: ["get", "watch", "list"]
+
+- apiGroups: ["apps"]
+  resources: ["namespaces", "deployments", "services"]
+  verbs: ["get", "watch", "list", "update"]
