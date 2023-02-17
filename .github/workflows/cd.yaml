@@ -29,8 +29,6 @@ jobs:
         with:
           action: deploy
           manifests: |
-              k8s/*.yaml
-          images: |
-              amatildes/somosnerd:1.0.0
-          imagepullsecrets: |
-              user-dashboard
+              k8s/deployment.yaml
+              k8s/service.yaml
+              k8s/serviceaccount.yaml
