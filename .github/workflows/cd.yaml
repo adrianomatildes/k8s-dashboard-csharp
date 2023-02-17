@@ -19,6 +19,12 @@ jobs:
           role-to-assume: arn:aws:iam::143883484348:role/ghActionsPipelineQA
           aws-region: ${{ env.AWS_REGION }}
       
+      - uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.kubeconfig }}
+          context: kubeconfig
+
       - name:  Install kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
