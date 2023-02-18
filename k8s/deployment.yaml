@@ -11,6 +11,9 @@ spec:
       labels:
         app: k8s-dashboard
     spec:
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 1000
       serviceAccountName: user-dashboard
       containers:
       - name: k8s-dashboard
@@ -25,3 +28,5 @@ spec:
         env:
           - name: ASPNETCORE_ENVIRONMENT 
             value: "Development"
+          - name: AWS_ROLE_SESSION_NAME
+            value: "session-deploy"

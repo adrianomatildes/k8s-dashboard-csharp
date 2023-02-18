@@ -8,7 +8,7 @@ permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
 jobs:
-  S3PackageUpload:
+  Entrega-Continua:
     runs-on: ubuntu-latest
     steps:
       - name: Login AWS
@@ -18,17 +18,11 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::143883484348:role/ghActionsPipelineQA
           aws-region: ${{ env.AWS_REGION }}
-      
-      - uses: azure/k8s-set-context@v3
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.kubeconfig }}
-          context: kubeconfig
+          role-session-name: AWS_ROLE_SESSION_NAME
 
-      - uses: Azure/k8s-deploy@v4
+      - name: Status deployment
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.kubeconfig }}
         with:
-          action: deploy
-          manifests: |
-              k8s/deployment.yaml
-              k8s/service.yaml
-              k8s/serviceaccount.yaml
+          args: rollout status deployment/my-app
