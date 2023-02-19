@@ -26,10 +26,3 @@ jobs:
           role-to-assume: arn:aws:iam::143883484348:role/PipelineGithub
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: AWS_ROLE_SESSION_NAME
-
-      - name: Status deployment
-        uses: kodermax/kubectl-aws-eks@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.kubeconfig }}
-        with:
-          args: rollout status deployment/my-app
