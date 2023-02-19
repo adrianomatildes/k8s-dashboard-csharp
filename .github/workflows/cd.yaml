@@ -31,6 +31,6 @@ jobs:
 
       - name: Deploy app to Kubernetes
         env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          KUBECONFIG: ${{ secrets.kubeconfig }}
         run: |
           kubectl get deploy
