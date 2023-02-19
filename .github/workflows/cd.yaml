@@ -26,3 +26,5 @@ jobs:
           role-to-assume: arn:aws:iam::143883484348:role/PipelineGithub
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: AWS_ROLE_SESSION_NAME
+
+      - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login docker.pkg.github.com -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
