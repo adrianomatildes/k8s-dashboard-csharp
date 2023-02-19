@@ -28,3 +28,10 @@ jobs:
           role-session-name: AWS_ROLE_SESSION_NAME
 
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login docker.pkg.github.com -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+
+      - name: Verificando status deployment
+        uses: kodermax/kubectl-aws-eks@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.kubeconfig }}
+        with:
+          args: rollout status deployment/k8s-dashboard-deploy
