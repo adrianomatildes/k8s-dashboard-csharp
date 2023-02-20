@@ -9,6 +9,8 @@ permissions:
       contents: read    # This is required for actions/checkout
 jobs:
   Entrega-Continua:
+    env:
+      AWS_ROLE_SESSION_NAME: session-deploy
     runs-on: ubuntu-latest
     steps:
       - uses: azure/k8s-set-context@v3
@@ -24,7 +26,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::143883484348:role/AccessEKSGithubRole
           aws-region: ${{ env.AWS_REGION }}
-          role-session-name: AWS_ROLE_SESSION_NAME
+          role-session-name: ${{ env.AWS_ROLE_SESSION_NAME }}
       
       - name: Verificando permission
         run: |
