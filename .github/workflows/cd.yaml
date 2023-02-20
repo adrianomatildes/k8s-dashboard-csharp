@@ -26,11 +26,8 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: AWS_ROLE_SESSION_NAME
       
-      - run: aws eks get-token --cluster-name eks --region us-east-1
-
-      - name: verify deployment
-        uses: kodermax/kubectl-aws-eks@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.kubeconfig }}
-        with:
-          args: rollout status deployment/k8s-dashboard-deploy
+      - name: Verificando permission
+        run: |
+          aws eks get-token --cluster-name eks --region us-east-1
+          aws eks --region us-east-1 update-kubeconfig --name eks
+          aws sts get-caller-identity
