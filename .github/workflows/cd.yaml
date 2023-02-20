@@ -26,7 +26,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::143883484348:role/AccessEKSGithubRole
           aws-region: ${{ env.AWS_REGION }}
-          role-session-name: ${{ env.AWS_ROLE_SESSION_NAME }}
+          # role-session-name: ${{ env.AWS_ROLE_SESSION_NAME }}
       
       - name: Verificando permission
         run: |
