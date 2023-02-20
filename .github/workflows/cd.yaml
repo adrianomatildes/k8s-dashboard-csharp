@@ -43,12 +43,7 @@ jobs:
 
       - uses: Azure/k8s-deploy@v4
         with:
-          name: eks
-          action: deploy
-          strategy: basic
-
-          private-cluster: true
+          namespace: 'default'
           manifests: |
               k8s/deployment.yaml
-          images: |
-              kubedevio/k8s-dashboard
+          images: 'kubedevio/k8s-dashboard'
