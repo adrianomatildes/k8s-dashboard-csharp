@@ -26,7 +26,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: AWS_ROLE_SESSION_NAME
       
-      - run: aws eks --name eks --region us-east-1 get-token
+      - run: aws eks get-token --cluster-name eks --region us-east-1
 
       - name: verify deployment
         uses: kodermax/kubectl-aws-eks@master
