@@ -7,6 +7,7 @@ env:
 permissions:
       id-token: write   # This is required for requesting the JWT
       contents: read    # This is required for actions/checkout
+      actions: read
 jobs:
   Entrega-Continua:
     env:
@@ -39,8 +40,15 @@ jobs:
           curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
       
-      - name: Testando o Kubectl
-        env:
-          kubeconfig: aws eks get-token --cluster-name eks --region us-east-1
-        run: |
-          kubectl apply -f k8s/deployment.yaml
+
+      - uses: Azure/k8s-deploy@v4
+        with:
+          name: eks
+          action: deploy
+          strategy: basic
+
+          private-cluster: true
+          manifests: |
+              k8s/deployment.yaml
+          images: |
+              kubedevio/k8s-dashboard
