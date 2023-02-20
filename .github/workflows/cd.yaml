@@ -33,3 +33,12 @@ jobs:
           aws eks get-token --cluster-name eks --region us-east-1
           aws eks --region us-east-1 update-kubeconfig --name eks
           aws sts get-caller-identity
+
+      - name: Instalando Kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      
+      - name: Testando o Kubectl
+        run: kubectl get svc
