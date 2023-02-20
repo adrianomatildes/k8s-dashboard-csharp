@@ -22,15 +22,13 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:iam::143883484348:role/PipelineGithub
+          role-to-assume: arn:aws:iam::143883484348:role/AccessEKSGithubRole
           aws-region: ${{ env.AWS_REGION }}
           role-session-name: AWS_ROLE_SESSION_NAME
 
-      - name: Deployment
-        uses: Pablommr/kubernetes-eks@v1.2.0
+      - name: verify deployment
+        uses: kodermax/kubectl-aws-eks@master
         env:
-          role-to-assume: arn:aws:iam::143883484348:role/PipelineGithub
-          aws-region: ${{ env.AWS_REGION }}
-          role-session-name: AWS_ROLE_SESSION_NAME
-          KUBECONFIG: ${{ secrets.kubeconfig }}
-          KUBE_YAML: k8s/
+          KUBE_CONFIG_DATA: ${{ secrets.kubeconfig }}
+        with:
+          args: rollout status deployment/my-app
