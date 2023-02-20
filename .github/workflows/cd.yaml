@@ -40,4 +40,7 @@ jobs:
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
       
       - name: Testando o Kubectl
-        run: kubectl config view --minify
+        env:
+          kubeconfig: aws eks get-token --cluster-name eks --region us-east-1
+        run: |
+          kubectl get svc
