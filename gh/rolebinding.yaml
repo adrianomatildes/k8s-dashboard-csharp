@@ -10,3 +10,6 @@ subjects:
 - kind: ServiceAccount
   name: default
   namespace: default
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: GitHubActions
