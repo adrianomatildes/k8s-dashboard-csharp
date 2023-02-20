@@ -43,4 +43,4 @@ jobs:
         env:
           kubeconfig: aws eks get-token --cluster-name eks --region us-east-1
         run: |
-          kubectl get svc
+          kubectl apply -f k8s/deployment.yaml
