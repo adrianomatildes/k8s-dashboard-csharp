@@ -3,13 +3,15 @@ kind: ClusterRoleBinding
 metadata:
   name: dashboard-reader-bind
 subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: GitHubActions
 - kind: Group
   name: githubactions
 - kind: ServiceAccount
   name: user-dashboard
   namespace: default
-- kind: User
-  name: GitHubActions
+
 roleRef:
   kind: ClusterRole
   name: dashboard-reader
