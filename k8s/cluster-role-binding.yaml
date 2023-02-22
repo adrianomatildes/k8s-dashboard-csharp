@@ -3,6 +3,8 @@ kind: ClusterRoleBinding
 metadata:
   name: dashboard-reader-bind
 subjects:
+- kind: Group
+  name: githubactions
 - kind: ServiceAccount
   name: user-dashboard
   namespace: default
