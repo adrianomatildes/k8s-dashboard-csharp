@@ -8,6 +8,8 @@ subjects:
 - kind: ServiceAccount
   name: user-dashboard
   namespace: default
+- kind: User
+  name: GitHubActions
 roleRef:
   kind: ClusterRole
   name: dashboard-reader
