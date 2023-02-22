@@ -9,4 +9,4 @@ rules:
 
 - apiGroups: ["apps"]
   resources: ["namespaces", "deployments", "services"]
-  verbs: ["get", "watch", "list", "update"]
+  verbs: ["get", "watch", "list", "update", "delete"]
