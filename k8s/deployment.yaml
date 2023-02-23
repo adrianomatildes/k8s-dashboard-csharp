@@ -17,7 +17,7 @@ spec:
       serviceAccountName: user-dashboard
       containers:
       - name: k8s-dashboard
-        image: kubedevio/k8s-dashboard
+        image: amatildes/k8s-dashboard:1.0
         imagePullPolicy: Always
         resources:
           limits:
